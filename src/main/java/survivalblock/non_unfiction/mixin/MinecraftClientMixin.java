@@ -6,11 +6,10 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.server.integrated.IntegratedServer;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import survivalblock.non_unfiction.NonUnfiction;
+import survivalblock.non_unfiction.NonUnfictionUtil;
 
 @Mixin(MinecraftClient.class)
 public class MinecraftClientMixin {
@@ -19,7 +18,7 @@ public class MinecraftClientMixin {
 
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;isIntegratedServerRunning()Z"))
     private boolean wreckingBallOne(MinecraftClient instance, Operation<Boolean> original){
-        if(this.player != null && NonUnfiction.equalsTargetUuidString(this.player.getUuidAsString())){
+        if(this.player != null && NonUnfictionUtil.equalsTarget(this.player.getUuid())){
             return true; // aaaaa how was the player null
         }
         return original.call(instance);
@@ -27,7 +26,7 @@ public class MinecraftClientMixin {
 
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/integrated/IntegratedServer;isRemote()Z"))
     private boolean wreckingBallTwo(IntegratedServer instance, Operation<Boolean> original){
-        if(this.player != null && NonUnfiction.equalsTargetUuidString(this.player.getUuidAsString())){
+        if(this.player != null && NonUnfictionUtil.equalsTarget(this.player.getUuid())){
             return false;
         }
         return original.call(instance);
