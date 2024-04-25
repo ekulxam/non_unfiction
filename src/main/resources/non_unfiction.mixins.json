@@ -3,6 +3,7 @@
   "package": "survivalblock.non_unfiction.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "CollisionViewMixin",
     "PotionItemMixin",
     "ServerCommandSourceMixin",
     "SkullBlockEntityMixin"
@@ -11,7 +12,7 @@
     "defaultRequire": 1
   },
   "client": [
-    "client.MinecraftClientMixin",
-    "client.InGameHudMixin"
+    "client.InGameHudMixin",
+    "client.MinecraftClientMixin"
   ]
 }
