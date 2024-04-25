@@ -17,6 +17,9 @@ import java.util.Objects;
 @Mixin(PotionItem.class)
 public class PotionItemMixin {
 
+    /**
+     * removes the invisibility particles when drinking an invis pot
+     */
     @WrapOperation(method = "finishUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"))
     private boolean noInvisParticles(LivingEntity user, StatusEffectInstance statusEffectInstance, Operation<Boolean> original){
         StatusEffect effect = statusEffectInstance.getEffectType();

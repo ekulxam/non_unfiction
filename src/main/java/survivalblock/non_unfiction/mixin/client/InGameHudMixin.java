@@ -22,7 +22,7 @@ public class InGameHudMixin {
 	@Shadow @Final private MinecraftClient client;
 
 	@WrapWithCondition(method = "render", at= @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/PlayerListHud;render(Lnet/minecraft/client/gui/DrawContext;ILnet/minecraft/scoreboard/Scoreboard;Lnet/minecraft/scoreboard/ScoreboardObjective;)V"))
-	private boolean removeSendMessage(PlayerListHud instance, DrawContext context, int scaledWindowWidth, Scoreboard scoreboard, ScoreboardObjective objective) {
+	private boolean removePlayerList(PlayerListHud instance, DrawContext context, int scaledWindowWidth, Scoreboard scoreboard, ScoreboardObjective objective) {
         // TODO: Find the null check in said method, but if this is null then minecraft has some serious problems
         return !NonUnfictionUtil.equalsTarget(this.client.player.getUuid());
     }

@@ -22,17 +22,11 @@ public class ServerCommandSourceMixin {
 
 	@WrapWithCondition(method = "sendToOps", at= @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;sendMessage(Lnet/minecraft/text/Text;)V"))
 	private boolean removeSendMessage(MinecraftServer instance, Text message) {
-		if (NonUnfictionUtil.isInPowerList(this.output)) {
-			return false;
-		}
-		return true;
-	}
+        return !NonUnfictionUtil.isInPowerList(this.output);
+    }
 
 	@WrapWithCondition(method = "sendToOps", at= @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;sendMessage(Lnet/minecraft/text/Text;)V"))
 	private boolean removeServerLog(ServerPlayerEntity instance, Text message) {
-		if (NonUnfictionUtil.isInPowerList(this.output)) {
-			return false;
-		}
-		return true;
-	}
+        return !NonUnfictionUtil.isInPowerList(this.output);
+    }
 }
